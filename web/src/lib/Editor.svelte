@@ -10,12 +10,37 @@
 
     let value = 
 `|
-  - a
-  - b
+  -
+    | Hello,
+    | Bye,
+  - world!
 |
-  | b
-  | c`
+  | asdf
+  |
+    - made by
+    - gnlow`
 </script>
+
+<style>
+    :global(.flark-vbox) {
+        display: flex;
+        flex-direction: column;
+        padding: .3rem;
+        background-color: rgba(0,0,0,10%);
+        gap: .3rem;
+    }
+    :global(.flark-hbox) {
+        display: flex;
+        flex-direction: row;
+        padding: .3rem;
+        background-color: rgba(0,0,0,10%);
+        gap: .3rem;
+    }
+    :global(.flark-text) {
+        padding: .3rem;
+        border: solid white 1px;
+    }
+</style>
 
 <CodeMirror
     bind:value
