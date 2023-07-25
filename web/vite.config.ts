@@ -7,8 +7,14 @@ export default defineConfig({
 		exclude: [
 			"codemirror",
 			"@codemirror/state",
+			"@codemirror/view",
+			"@codemirror/autocomplete",
 			"@codemirror/language",
 			"@codemirror/theme-one-dark",
+			"@codemirror/lang-javascript",
+			"@lezer/highlight",
+			"@lezer/lr",
+			"@lezer/common",
 			"flark",
 		]
 	}

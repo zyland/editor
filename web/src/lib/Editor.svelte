@@ -10,7 +10,6 @@
 <CodeMirror
     bind:value
     lang={flark()}
-    theme={oneDark}
     extensions={[
         syntaxHighlighting(myHighlightStyle)
     ]}
