@@ -23,6 +23,7 @@
 		"@codemirror/language": "^6.8.0",
 		"@codemirror/theme-one-dark": "^6.1.2",
 		"@lezer/highlight": "^1.1.6",
+		"flark": "0.1.0",
 		"svelte-codemirror-editor": "^1.1.0"
 	}
 }
