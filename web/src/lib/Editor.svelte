@@ -1,6 +1,11 @@
 <script>
     import CodeMirror from "svelte-codemirror-editor"
-    import { flark, myHighlightStyle } from "$lib/lang.js"
+    import {
+        flark,
+        myHighlightStyle,
+        parser,
+        toHtml,
+    } from "$lib/lang.js"
     import { syntaxHighlighting } from "@codemirror/language"
 
     let value = 
@@ -19,3 +24,5 @@
         syntaxHighlighting(myHighlightStyle)
     ]}
 />
+
+{@html toHtml(value)}

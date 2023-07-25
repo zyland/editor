@@ -1,4 +1,5 @@
-import { parser, flarkHighlighting } from "flark"
+import { parser, flarkHighlighting, toHtml } from "flark"
+export { parser, toHtml }
 
 import {
   foldNodeProp,
@@ -9,17 +10,19 @@ import {
   HighlightStyle,
 } from "@codemirror/language"
 
-import {styleTags, tags as t} from "@lezer/highlight"
+import { tags as t } from "@lezer/highlight"
 
 let parserWithMetadata = parser.configure({
     props: [
       flarkHighlighting,
+      /*
       indentNodeProp.add({
         Block: context => context.column(context.node.from) + context.unit
       }),
       foldNodeProp.add({
         Block: foldInside
       })
+      */
     ]
   })
 
