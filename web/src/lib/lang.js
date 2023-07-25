@@ -3,7 +3,7 @@ export { parser, toHtml }
 
 import {
   foldNodeProp,
-  foldInside,
+  getIndentation,
   indentNodeProp,
   LRLanguage,
   LanguageSupport,
@@ -20,11 +20,12 @@ const boxFold = node => ({
 let parserWithMetadata = parser.configure({
     props: [
       flarkHighlighting,
-      /*
+      
       indentNodeProp.add({
-        Block: context => context.column(context.node.from) + context.unit
+        VBox: context => context.column(context.node.from),
+        HBox: context => context.column(context.node.from),
       }),
-      */
+      
       foldNodeProp.add({
         VBox: boxFold,
         HBox: boxFold,
