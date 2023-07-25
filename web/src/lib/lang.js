@@ -6,6 +6,7 @@ import {
   indentNodeProp,
   LRLanguage,
   LanguageSupport,
+  HighlightStyle,
 } from "@codemirror/language"
 
 import {styleTags, tags as t} from "@lezer/highlight"
@@ -16,7 +17,7 @@ let parserWithMetadata = parser.configure({
         Identifier: t.variableName,
         //Boolean: t.bool,
         //String: t.string,
-        Comment: t.lineComment,
+        Comment: t.comment,
         "( )": t.paren
       }),
       indentNodeProp.add({
@@ -38,3 +39,8 @@ const language = LRLanguage.define({
 export function flark() {
   return new LanguageSupport(language)
 }
+
+export const myHighlightStyle = HighlightStyle.define([
+  {tag: t.keyword, color: "#fc6"},
+  {tag: t.comment, color: "#f5d", fontStyle: "italic"},
+])
