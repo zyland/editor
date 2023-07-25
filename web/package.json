@@ -20,8 +20,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@codemirror/commands": "^6.2.4",
 		"@codemirror/language": "^6.8.0",
+		"@codemirror/state": "^6.2.1",
 		"@codemirror/theme-one-dark": "^6.1.2",
+		"@codemirror/view": "^6.15.3",
 		"@lezer/highlight": "^1.1.6",
 		"flark": "0.1.0",
 		"svelte-codemirror-editor": "^1.1.0"

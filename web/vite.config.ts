@@ -8,6 +8,7 @@ export default defineConfig({
 			"codemirror",
 			"@codemirror/state",
 			"@codemirror/view",
+			"@codemirror/commands",
 			"@codemirror/autocomplete",
 			"@codemirror/language",
 			"@codemirror/theme-one-dark",

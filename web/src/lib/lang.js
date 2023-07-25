@@ -12,6 +12,11 @@ import {
 
 import { tags as t } from "@lezer/highlight"
 
+const boxFold = node => ({
+  from:node.from,
+  to:node.childBefore(node.to)?.to||node.to
+})
+
 let parserWithMetadata = parser.configure({
     props: [
       flarkHighlighting,
@@ -19,10 +24,11 @@ let parserWithMetadata = parser.configure({
       indentNodeProp.add({
         Block: context => context.column(context.node.from) + context.unit
       }),
-      foldNodeProp.add({
-        Block: foldInside
-      })
       */
+      foldNodeProp.add({
+        VBox: boxFold,
+        HBox: boxFold,
+      })
     ]
   })
 
