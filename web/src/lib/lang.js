@@ -1,4 +1,4 @@
-import { parser, flarkHighlighting, toHtml } from "flark"
+import { parser, toHtml } from "flark"
 export { parser, toHtml }
 
 import {
@@ -18,9 +18,7 @@ const boxFold = node => ({
 })
 
 let parserWithMetadata = parser.configure({
-    props: [
-      flarkHighlighting,
-      
+    props: [      
       indentNodeProp.add({
         VBox: context => context.column(context.node.from),
         HBox: context => context.column(context.node.from),
@@ -44,7 +42,14 @@ export function flark() {
   return new LanguageSupport(language)
 }
 
+import { dark } from "ayu"
+const s = dark.syntax
+
 export const myHighlightStyle = HighlightStyle.define([
-  {tag: t.operator, color: "#e60"},
-  {tag: t.content, color: "#252"},
+  {tag: t.operator, color: s.operator.hex()},
+  {tag: t.content, color: s.markup.hex()},
+  {tag: t.brace, color: s.special.hex()},
+  {tag: t.bracket, color: s.regexp.hex()},
+  {tag: t.name, color: s.func.hex()},
+  {tag: t.number, color: s.constant.hex()}
 ])

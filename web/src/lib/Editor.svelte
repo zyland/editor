@@ -7,33 +7,20 @@
         toHtml,
     } from "$lib/lang.js"
     import { syntaxHighlighting } from "@codemirror/language"
+    import {EditorView} from "@codemirror/view"
+    import { dark } from "ayu"
 
     let value = 
-`|
-  - <h1>Flark</h1>
-  - <a href="https://github.com/flark-lang/flark">GitHub</a>
-  - 😎
+`| Hello
+| {catchWord} [center p.35]
 |
-  -
-    | flexbox-based
-    | tiny
-  - markup language!
-|
-  |
-    - |
-    - -
-  | makes
-  |
-    - vertical
-    - horizontal
-  | box!
-|
-  | This editor
-  |
-    - built with
-    -
-      | CodeMirror
-      | Svelte
+  - [a]
+    | {name_kr} [t.64]
+    |
+      - {name_self}
+      - {name_alt}
+  - {flag}
+| {map} [w.fill h.440]
 `
 </script>
 
@@ -88,6 +75,26 @@
             extensions={[
                 syntaxHighlighting(myHighlightStyle)
             ]}
+            theme={EditorView.theme({
+              "&": {
+                color: "white",
+                backgroundColor: dark.ui.bg.hex()
+              },
+              ".cm-content": {
+                caretColor: "white"
+              },
+              "&.cm-focused .cm-cursor": {
+                borderLeftColor: "white"
+              },
+              "&.cm-focused .cm-selectionBackground, ::selection": {
+                backgroundColor: dark.ui.selection.normal.hex()
+              },
+              ".cm-gutters": {
+                backgroundColor: dark.editor.gutter.normal.hex(),
+                color: "#ddd",
+                border: "none"
+              }
+            }, {dark: true})}
         />
     </editor>
     <preview>
