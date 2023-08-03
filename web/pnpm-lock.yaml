@@ -27,8 +27,8 @@ dependencies:
     specifier: ^8.0.1
     version: 8.0.1
   flark:
-    specifier: 0.1.0
-    version: 0.1.0
+    specifier: 0.1.1
+    version: 0.1.1
   svelte-codemirror-editor:
     specifier: ^1.1.0
     version: 1.1.0(codemirror@6.0.1)
@@ -734,8 +734,8 @@ packages:
       to-regex-range: 5.0.1
     dev: true
 
-  /flark@0.1.0:
-    resolution: {integrity: sha512-3tW/w63M0CXWU/7bExnI7sqUoieAvd+e3uyOtZG7JbeIX2JusA1IrPQY/T9mjRT/Dw8x8zDSR2IZwdlgL9pCAw==}
+  /flark@0.1.1:
+    resolution: {integrity: sha512-iJRhcCcMzV7lRqzWZVv9riSPDROdTHwRgr/afThXt0DFqlxqgeJlTyA7VpfJL1gPsz0G4mA1xoDY63N3+Y/4sg==}
     dependencies:
       '@lezer/highlight': 1.1.6
       '@lezer/lr': 1.3.9
