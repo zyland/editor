@@ -7,90 +7,85 @@
         toHtml,
     } from "$lib/lang.js"
     import { syntaxHighlighting } from "@codemirror/language"
+    import {EditorView} from "@codemirror/view"
+    import { dark } from "ayu"
 
     let value = 
-`|
-  - <h1>Flark</h1>
-  - <a href="https://github.com/flark-lang/flark">GitHub</a>
-  - 😎
-|
-  -
-    | flexbox-based
-    | tiny
-  - markup language!
-|
-  |
-    - |
-    - -
-  | makes
-  |
-    - vertical
-    - horizontal
-  | box!
-|
-  | This editor
-  |
-    - built with
+`| [p(32) gap(32) bg(#eef) pack]
+  | [gap(16) w(100%) w(~2000)]
+    - Flark [font(64) bold grow]
+    - <a href="https://github.com/flark-lang/flark">GitHub</a> [c(blue) bold underline]
+    - 😎
+  | [font(32) pack text(right) gap(32)]
     -
-      | CodeMirror
-      | Svelte
+      | flexbox-based
+      | tiny
+    - markup language! [font(48)]
+  | [pack text(center) font(32) r(16) clip b(black) w(600)]
+    | [w(100%) hbox(fill)]
+      - | [flex(1) bg(#3555ea) c(#eef) vpack]
+      - - [flex(1) bg(#fc8041) vpack]
+    | makes
+    | [w(100%)]
+      - vertical [flex(1) bg(#3555ea) c(#eef)]
+      - horizontal [flex(1) bg(#fc8041)]
+    | box!
+  | [r(16) clip b(black) w(600) p(32)]
+    | This editor [font(32)]
+    | [font(36)]
+      - built with [grow]
+      - [text(right) bold]
+        | CodeMirror [c(#da687d)]
+        | Svelte [c(#f73c00)]
+        | AdorableCSS [c(#fb3958)]
 `
 </script>
 
 <style>
-    :global(.flark-vbox) {
-        display: flex;
-        flex-direction: column;
-        padding: .3rem;
-        background-color: rgba(0,0,50,10%);
-        gap: .3rem;
-        width: 100%;
-    }
-    :global(.flark-hbox) {
-        display: flex;
-        flex-direction: row;
-        padding: .3rem;
-        background-color: rgba(0,0,50,10%);
-        gap: .3rem;
-        align-items: center;
-    }
-    :global(.flark-text) {
-        padding: .3rem;
-        border: solid white 1px;
-        width: 100%;
-        box-sizing: border-box;
-        text-align: center;
-    }
-
     app {
         display: flex;
         flex-direction: row;
         height: 100vh;
-        font-size: 32px;
+        font-size: 16px;
         justify-content: center;
         flex-wrap: wrap;
         align-content: flex-start;
-    }
-    editor, preview {
-        width: 100%;
-        max-width: 600px;
-    }
-    preview {
-        font-family: monospace;
+        gap: 20px;
+        padding: 20px;
     }
 </style>
 
 <app>
-    <editor>
+    <editor class="r(20) clip b(black) w(400~) grow bg(#0b0e14)">
         <CodeMirror
             bind:value
             lang={flark()}
             extensions={[
                 syntaxHighlighting(myHighlightStyle)
             ]}
+            theme={EditorView.theme({
+              "&": {
+                color: "white",
+                backgroundColor: dark.ui.bg.hex()
+              },
+              ".cm-content": {
+                caretColor: "white"
+              },
+              "&.cm-focused .cm-cursor": {
+                borderLeftColor: "white"
+              },
+              "&.cm-focused .cm-selectionBackground, ::selection": {
+                backgroundColor: dark.ui.selection.normal.hex()
+              },
+              ".cm-gutters": {
+                backgroundColor: dark.editor.gutter.normal.hex(),
+                color: "#ddd",
+                border: "none"
+              }
+            }, {dark: true})}
         />
     </editor>
-    <preview>
+    <preview class="r(20) clip b(black) w(800~) grow monospace">
         {@html toHtml(value)} 
     </preview>
 </app>
