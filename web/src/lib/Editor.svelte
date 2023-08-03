@@ -11,44 +11,37 @@
     import { dark } from "ayu"
 
     let value = 
-`| Hello
-| {catchWord} [center p.35]
-|
-  - [a]
-    | {name_kr} [t.64]
-    |
-      - {name_self}
-      - {name_alt}
-  - {flag}
-| {map} [w.fill h.440]
+`| [p(50) gap(50) bg(#eef) pack]
+  | [gap(20) w(100%) w(~2000)]
+    - Flark [font(100) bold grow]
+    - <a href="https://github.com/flark-lang/flark">GitHub</a> [c(blue) bold underline]
+    - 😎
+  | [font(50) pack text(right) gap(50)]
+    -
+      | flexbox-based
+      | tiny
+    - markup language! [font(80)]
+  | [pack text(center) font(50) r(20) clip b(black) w(800)]
+    | [w(100%) h(200) hbox(fill)]
+      - | [flex(1) bg(#3555ea) c(#eef) vpack]
+      - - [flex(1) bg(#fc8041) vpack]
+    | makes
+    | [w(100%)]
+      - vertical [flex(1) bg(#3555ea) c(#eef)]
+      - horizontal [flex(1) bg(#fc8041)]
+    | box!
+  | [r(20) clip b(black) w(800) p(50)]
+    | This editor [font(50)]
+    | [font(40)]
+      - built with [grow]
+      - [text(right) bold]
+        | CodeMirror [c(#da687d)]
+        | Svelte [c(#f73c00)]
+        | AdorableCSS [c(#fb3958)]
 `
 </script>
 
 <style>
-    :global(.flark-vbox) {
-        display: flex;
-        flex-direction: column;
-        padding: .3rem;
-        background-color: rgba(0,0,50,10%);
-        gap: .3rem;
-        width: 100%;
-    }
-    :global(.flark-hbox) {
-        display: flex;
-        flex-direction: row;
-        padding: .3rem;
-        background-color: rgba(0,0,50,10%);
-        gap: .3rem;
-        align-items: center;
-    }
-    :global(.flark-text) {
-        padding: .3rem;
-        border: solid white 1px;
-        width: 100%;
-        box-sizing: border-box;
-        text-align: center;
-    }
-
     app {
         display: flex;
         flex-direction: row;
@@ -60,7 +53,7 @@
     }
     editor, preview {
         width: 100%;
-        max-width: 600px;
+        /* max-width: 600px; */
     }
     preview {
         font-family: monospace;

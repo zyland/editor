@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Heir of Light";
+    src: url("/fonts/HeirofLightOTFBold.otf") format(opentype);
+}
+@font-face {
+    font-family: "CMU Serif Bold";
+    src: url("/fonts/cmunbx.ttf");
+}
+.fantasy {
+    font-family: "Heir of Light";
+}
+.serif {
+    font-family: "CMU Serif Bold";
+}
