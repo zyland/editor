@@ -11,18 +11,18 @@
     import { dark } from "ayu"
 
     let value = 
-`| [p(50) gap(50) bg(#eef) pack]
-  | [gap(20) w(100%) w(~2000)]
-    - Flark [font(100) bold grow]
+`| [p(32) gap(32) bg(#eef) pack]
+  | [gap(16) w(100%) w(~2000)]
+    - Flark [font(64) bold grow]
     - <a href="https://github.com/flark-lang/flark">GitHub</a> [c(blue) bold underline]
     - 😎
-  | [font(50) pack text(right) gap(50)]
+  | [font(32) pack text(right) gap(32)]
     -
       | flexbox-based
       | tiny
-    - markup language! [font(80)]
-  | [pack text(center) font(50) r(20) clip b(black) w(800)]
-    | [w(100%) h(200) hbox(fill)]
+    - markup language! [font(48)]
+  | [pack text(center) font(32) r(16) clip b(black) w(600)]
+    | [w(100%) hbox(fill)]
       - | [flex(1) bg(#3555ea) c(#eef) vpack]
       - - [flex(1) bg(#fc8041) vpack]
     | makes
@@ -30,9 +30,9 @@
       - vertical [flex(1) bg(#3555ea) c(#eef)]
       - horizontal [flex(1) bg(#fc8041)]
     | box!
-  | [r(20) clip b(black) w(800) p(50)]
-    | This editor [font(50)]
-    | [font(40)]
+  | [r(16) clip b(black) w(600) p(32)]
+    | This editor [font(32)]
+    | [font(36)]
       - built with [grow]
       - [text(right) bold]
         | CodeMirror [c(#da687d)]
@@ -46,22 +46,17 @@
         display: flex;
         flex-direction: row;
         height: 100vh;
-        font-size: 32px;
+        font-size: 16px;
         justify-content: center;
         flex-wrap: wrap;
         align-content: flex-start;
-    }
-    editor, preview {
-        width: 100%;
-        /* max-width: 600px; */
-    }
-    preview {
-        font-family: monospace;
+        gap: 20px;
+        padding: 20px;
     }
 </style>
 
 <app>
-    <editor>
+    <editor class="r(20) clip b(black) w(400~) grow bg(#0b0e14)">
         <CodeMirror
             bind:value
             lang={flark()}
@@ -90,7 +85,7 @@
             }, {dark: true})}
         />
     </editor>
-    <preview>
+    <preview class="r(20) clip b(black) w(800~) grow monospace">
         {@html toHtml(value)} 
     </preview>
 </app>
