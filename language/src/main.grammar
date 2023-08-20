@@ -1,0 +1,89 @@
+//!element
+
+@top Tree { element }
+
+element {
+    VBox { (VPipe Item)+ }
+  | HBox { (HPipe Item)+ }
+}
+
+Item {
+    template? lineEnd Block?
+}
+
+//!block
+
+Block { indent element (dedent | eof) }
+
+template { (
+    PlainText
+  | InsertBlock
+  | StyleBlock
+)+ }
+
+InsertBlock {
+  LBrace
+  expression?
+  RBrace
+}
+
+expression {
+    Identifier
+  | Number
+}
+
+StyleBlock {
+  LBracket
+  StyleExpr*
+  RBracket
+}
+
+StyleExpr {
+    plainText
+}
+
+//!skip
+
+@skip {
+  spaces |
+  Comment |
+  blankLineStart (spaces | Comment)* lineEnd
+}
+
+//!lineEnd
+
+lineEnd { newline | eof }
+
+//!context
+
+@context trackIndent from "./tokens.js"
+
+//!externalTokens
+
+@external tokens indentation from "./tokens.js" {
+  indent
+  dedent
+  blankLineStart
+}
+
+//!tokens
+
+@tokens {
+  spaces { $[ \t]+ }
+  newline { "\n" }
+  eof { @eof }
+  Comment { "#" ![\n]+ }
+  plainText { ![ \t\n#{}[\]] ![\n{}[\]]* }
+  PlainText { plainText }
+  VPipe { "|" }
+  HPipe { "-" }
+  Identifier { $[a-zA-Z_] $[a-zA-Z_0-9]* }
+  Number { "-"? @digit+ ("." @digit+)? }
+  LBrace { "{" }
+  RBrace { "}" }
+  LBracket { "[" }
+  RBracket { "]" }
+}
+
+
+@external propSource highlight from "./highlight"

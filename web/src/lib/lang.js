@@ -1,4 +1,4 @@
-import { parser, toHtml } from "flark"
+import { parser, toHtml } from "../../../language/dist/index.js"
 export { parser, toHtml }
 
 import {
