@@ -1,4 +1,5 @@
 import {lezer} from "@lezer/generator/rollup"
+import typescript from "@rollup/plugin-typescript"
 
 export default {
     input: "./src/index.js",
@@ -9,5 +10,5 @@ export default {
         }
     ],
     external: ["@lezer/lr", "@lezer/highlight"],
-    plugins: [lezer()]
+    plugins: [lezer(), typescript()]
 }

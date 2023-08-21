@@ -1,46 +1,32 @@
 //!element
 
-@top Tree { element }
+@top Tree { expr lineEnd }
 
-element {
-    VBox { (VPipe Item)+ }
-  | HBox { (HPipe Item)+ }
+@precedence {
+  concat @left,
+  mul @left,
+  add @left,
+  logic @left
 }
 
-Item {
-    template? lineEnd Block?
+expr {
+    ID { Identifier }
+  | String
+  //| Concat { expr !concat endExpr }
+  | Bin {
+      expr !mul(Mul | Div) endExpr
+    | expr !add(Add | Sub | Join) endExpr
+    | expr !logic(Or | And) endExpr
+  }
+  | LogicBlock { (!logic (Or | And) expr lineEnd)+ }
+  | "(" expr ")"
+}
+endExpr {
+    expr
+  | Block
 }
 
-//!block
-
-Block { indent element (dedent | eof) }
-
-template { (
-    PlainText
-  | InsertBlock
-  | StyleBlock
-)+ }
-
-InsertBlock {
-  LBrace
-  expression?
-  RBrace
-}
-
-expression {
-    Identifier
-  | Number
-}
-
-StyleBlock {
-  LBracket
-  StyleExpr*
-  RBracket
-}
-
-StyleExpr {
-    plainText
-}
+Block { lineEnd indent expr (dedent | eof) }
 
 //!skip
 
@@ -73,17 +59,13 @@ lineEnd { newline | eof }
   newline { "\n" }
   eof { @eof }
   Comment { "#" ![\n]+ }
-  plainText { ![ \t\n#{}[\]] ![\n{}[\]]* }
-  PlainText { plainText }
-  VPipe { "|" }
-  HPipe { "-" }
-  Identifier { $[a-zA-Z_] $[a-zA-Z_0-9]* }
-  Number { "-"? @digit+ ("." @digit+)? }
-  LBrace { "{" }
-  RBrace { "}" }
-  LBracket { "[" }
-  RBracket { "]" }
+  Identifier { $[a-zA-Z0-9_]+ }
+  String { '"' !["]* '"' }
+  Add { "+" }
+  Sub { "-" }
+  Mul { "*" }
+  Div { "/" }
+  Or { "|" }
+  And { "&" }
+  Join { "\\" }
 }
-
-
-@external propSource highlight from "./highlight"
