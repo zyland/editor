@@ -18,7 +18,7 @@ expr {
     | expr !add(Add | Sub | Join) endExpr
     | expr !logic(Or | And) endExpr
   }
-  | LogicBlock { (!logic (Or | And) expr lineEnd)+ }
+  | LogicBlock { LogicLine {!logic (Or | And) expr lineEnd}+ }
   | "(" expr ")"
 }
 endExpr {

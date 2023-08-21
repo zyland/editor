@@ -1,23 +1,43 @@
 import { parser } from "./main.grammar"
+import { Tree, SyntaxNodeRef } from "@lezer/common"
 
-export function toHtml(text) {
+import { Expr, expand, $ } from "@zyland/core"
+
+export function toHtml(text: string) {
     const tree = parser.parse(text)
 
     const getText = node => text.slice(node.from, node.to)
     
-    tree.iterate({
-        enter(node) {
-            if (["VPipe", "HPipe"].includes(node.name)) return false
-            if (node.name == "Item") {
+    const visit =
+        (node: SyntaxNodeRef): Expr => {
+            if (node.name == "LogicBlock") {
+                const [head, ...lines] = node.node.getChildren("LogicLine")
+                return lines
+                    .reduce((acc: Expr, x): Expr => {
+                        const opName = x.node.firstChild.type.name.toLowerCase() as "or"
+                        return {[opName]: [acc, visit(x.node.lastChild)]}
+                    },
+                    visit(head.lastChild)
+                    )
             }
-        },
-        leave(node) {
-            if ([
-                "Item",
-            ].includes(node.name)) {
+            if (node.name == "String") {
+                const text = getText(node.node)
+                return {literal: text.substring(1, text.length-1)}
             }
-            return true
+            if (node.name == "Bin") {
+                const opName = node.node.firstChild.nextSibling.type.name.toLowerCase() as "or"
+                return {[opName]: [
+                    visit(node.node.firstChild),
+                    visit(node.node.lastChild),
+                ] as [Expr, Expr]}
+            }
         }
-    })
-    return text
+    console.log(
+        visit(tree.topNode.firstChild),
+        $(expand(visit(tree.topNode.firstChild)))
+        .take(10)
+    )
+    return $(expand(visit(tree.topNode.firstChild)))
+        .map(x => JSON.stringify(x))
+        .take(10)
 }

@@ -16,7 +16,7 @@ export default defineConfig({
 			"@lezer/highlight",
 			"@lezer/lr",
 			"@lezer/common",
-			"flark",
+			"@zyland/core",
 		]
 	}
 });
