@@ -6,27 +6,31 @@
   concat @left,
   mul @left,
   add @left,
-  logic @left
+  logic @left,
+  def @left
 }
 
 expr {
-    ID { Identifier }
+    Identifier
   | String
   //| Concat { expr !concat endExpr }
-  | Bin {
+  | BinExpr {
       expr !mul(Mul | Div) endExpr
     | expr !add(Add | Sub | Join) endExpr
     | expr !logic(Or | And) endExpr
+  }
+  | DefExpr {
+    Identifier !def(Def) endExpr
   }
   | LogicBlock { LogicLine {!logic (Or | And) expr lineEnd}+ }
   | "(" expr ")"
 }
 endExpr {
     expr
-  | Block
+  | block
 }
 
-Block { lineEnd indent expr (dedent | eof) }
+block { lineEnd indent expr (dedent | eof) }
 
 //!skip
 
@@ -68,4 +72,5 @@ lineEnd { newline | eof }
   Or { "|" }
   And { "&" }
   Join { "\\" }
+  Def { ":" }
 }
