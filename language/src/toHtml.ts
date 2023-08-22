@@ -46,7 +46,7 @@ export function toHtml(text: string) {
     console.log(visit(tree.topNode.firstChild))
     //return JSON.stringify(visit(tree.topNode.firstChild))
     return $(expand({ref: "pat"})(visit(tree.topNode.firstChild)))
-        .map(x => x.literal)
+        .map(x => `"`+x?.literal+`"`)
         .take(10)
         .join("<br>")
 }

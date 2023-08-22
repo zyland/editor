@@ -64,7 +64,7 @@ pat:
             }, {dark: true})}
         />
     </editor>
-    <preview class="r(20) clip b(black) w(800~) grow monospace">
+    <preview class="r(20) p(10) clip b(black) w(400~) grow monospace">
         {@html toHtml(value)} 
     </preview>
 </app>
