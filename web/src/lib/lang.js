@@ -38,7 +38,7 @@ const language = LRLanguage.define({
   }
 })
 
-export function flark() {
+export function zy() {
   return new LanguageSupport(language)
 }
 

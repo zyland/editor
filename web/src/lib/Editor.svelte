@@ -1,7 +1,7 @@
 <script>
     import CodeMirror from "svelte-codemirror-editor"
     import {
-        flark,
+        zy,
         myHighlightStyle,
         parser,
         toHtml,
@@ -38,7 +38,7 @@ pat:
     <editor class="r(20) clip b(black) w(400~) grow bg(#0b0e14)">
         <CodeMirror
             bind:value
-            lang={flark()}
+            lang={zy()}
             extensions={[
                 syntaxHighlighting(myHighlightStyle)
             ]}
