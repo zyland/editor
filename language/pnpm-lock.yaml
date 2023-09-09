@@ -15,8 +15,8 @@ dependencies:
     specifier: ^1.3.10
     version: 1.3.10
   '@zyland/core':
-    specifier: ^0.1.0
-    version: 0.1.0
+    specifier: ^0.2.2
+    version: 0.2.2
 
 devDependencies:
   '@lezer/generator':
@@ -95,8 +95,8 @@ packages:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
     dev: true
 
-  /@zyland/core@0.1.0:
-    resolution: {integrity: sha512-DP1DE4JufWCmbR0lCVE+ZJMXpEgfe4f8mK5r8UDk1iWjsVyChFFArO37RArWQ3mQB0PIkWORUIKn2FJK4b+Pug==}
+  /@zyland/core@0.2.2:
+    resolution: {integrity: sha512-1wlYP+4miB2ICpVWd03poTPfzxd9YGL0wbiztJkHxfS0BJMWfuRA5Mp9V4Olenoa5L5+DPh5xV5F0y5sc5GUFQ==}
     dependencies:
       ts-pattern: 5.0.5
     dev: false

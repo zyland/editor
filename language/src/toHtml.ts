@@ -1,7 +1,7 @@
 import { parser } from "./main.grammar"
 import { Tree, SyntaxNodeRef } from "@lezer/common"
 
-import { Expr, expand, $ } from "@zyland/core"
+import { Expr, expand, $, f } from "@zyland/core"
 
 export function toHtml(text: string, tree: Tree) {
     const getText = node => text.slice(node.from, node.to)
@@ -29,10 +29,22 @@ export function toHtml(text: string, tree: Tree) {
             }
             if (node.name == "BinExpr") {
                 const opName = node.node.firstChild.nextSibling.type.name.toLowerCase() as "or"
-                return {[opName]: [
-                    visit(node.node.firstChild),
-                    visit(node.node.lastChild),
-                ]}
+                if ([
+                    "or",
+                    "and",
+                    "call",
+                    "arrow",
+                ].includes(opName)) {
+                    return {[opName]: [
+                        visit(node.node.firstChild),
+                        visit(node.node.lastChild),
+                    ]}    
+                } else {
+                    return f({[opName]: [
+                        visit(node.node.firstChild),
+                        visit(node.node.lastChild),
+                    ]}  )
+                }
             }
             if (node.name == "DefExpr") {
                 return {def: [

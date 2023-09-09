@@ -11,7 +11,7 @@
         "@lezer/common": "^1.0.4",
         "@lezer/highlight": "^1.1.6",
         "@lezer/lr": "^1.3.10",
-        "@zyland/core": "^0.1.0"
+        "@zyland/core": "^0.2.2"
     },
     "scripts": {
         "build-gen": "lezer-generator src/main.grammar -o src/main.grammar.ts",
