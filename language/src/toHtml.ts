@@ -3,9 +3,7 @@ import { Tree, SyntaxNodeRef } from "@lezer/common"
 
 import { Expr, expand, $ } from "@zyland/core"
 
-export function toHtml(text: string) {
-    const tree = parser.parse(text)
-
+export function toHtml(text: string, tree: Tree) {
     const getText = node => text.slice(node.from, node.to)
     
     const visit =

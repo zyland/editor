@@ -10,6 +10,8 @@
     import {EditorView} from "@codemirror/view"
     import { dark } from "ayu"
 
+    import {TreeFragment} from "@lezer/common"
+
     let value = 
 `
 pat:
@@ -18,6 +20,14 @@ pat:
   | pat \\
     | "x"
     | "-"`
+    
+    let tree = parser.parse(value)
+    let fragments = TreeFragment.addTree(tree)
+
+    const change = t => {
+      tree = parser.parse(value, fragments)
+      fragments = TreeFragment.addTree(tree, fragments)
+    }
 </script>
 
 <style>
@@ -38,6 +48,7 @@ pat:
     <editor class="r(20) clip b(black) w(400~) grow bg(#0b0e14)">
         <CodeMirror
             bind:value
+            on:change={change}
             lang={zy()}
             extensions={[
                 syntaxHighlighting(myHighlightStyle)
@@ -65,7 +76,7 @@ pat:
         />
     </editor>
     <preview class="r(20) p(10) clip b(black) w(400~) grow monospace">
-        {@html toHtml(value)} 
+        {@html toHtml(value, tree)} 
     </preview>
 </app>
 
