@@ -1,36 +1,56 @@
 //!element
 
-@top Tree { expr lineEnd }
+@top Tree { expr }
 
 @precedence {
-  concat @left,
+  call @left,
   mul @left,
   add @left,
   logic @left,
-  def @left
+  def @left,
+  lines @left
 }
 
 expr {
-    Identifier
-  | String
-  //| Concat { expr !concat endExpr }
-  | BinExpr {
-      expr !mul(Mul | Div) endExpr
-    | expr !add(Add | Sub | Join) endExpr
-    | expr !logic(Or | And) endExpr
-  }
-  | DefExpr {
-    Identifier !def(Def) endExpr
-  }
-  | LogicBlock { LogicLine {!logic (Or | And) expr lineEnd}+ }
+    nonLine
+  | line
+  | Lines { line !lines expr }
   | "(" expr ")"
 }
-endExpr {
-    expr
-  | block
+
+nonLine {
+    Identifier
+  | String
+  | Call { nonLine !call expr }
+  | BinExpr {
+      expr !mul(Mul | Div) expr
+    | expr !add(Add | Sub | Join) expr
+    | expr !logic(Or | And) expr
+    | expr !def(Def) expr
+  }
 }
 
-block { lineEnd indent expr (dedent | eof) }
+line {
+    expr newline
+  | Call { expr block }
+  | BinExpr {
+      expr !mul(Mul | Div) block
+    | expr !add(Add | Sub | Join) block
+    | expr !logic(Or | And) block
+    | expr !def(Def) block
+  }
+}
+
+block {
+  newline indent blockable (dedent | eof)
+}
+
+blockable {
+    expr newline
+  | LogicBlock {
+      LogicLine { !logic (Or | And) expr (newline | eof) }+
+  }
+}
 
 //!skip
 
@@ -57,18 +77,17 @@ lineEnd { newline | eof }
 }
 
 //!tokens
-
 @tokens {
   spaces { $[ \t]+ }
   newline { "\n" }
   eof { @eof }
-  Comment { "#" ![\n]+ }
+  Comment { "//" ![\n]+ }
   Identifier { $[a-zA-Z0-9_]+ }
   String { '"' !["]* '"' }
   Add { "+" }
   Sub { "-" }
   Mul { "*" }
-  Div { "/" }
+  Div { "/" ![/] }
   Or { "|" }
   And { "&" }
   Join { "\\" }
