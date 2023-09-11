@@ -48,7 +48,7 @@ block {
 blockable {
     expr newline
   | LogicBlock {
-      LogicLine { !logic (Or | And) expr (newline | eof) }+
+      LogicLine { !logic (Or | And) expr (newline | eof)? }+
   }
 }
 
