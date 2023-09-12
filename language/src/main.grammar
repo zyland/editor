@@ -32,7 +32,7 @@ nonLine {
 
 line {
     expr newline
-  | Call { expr block }
+  | Call { expr !call block }
   | BinExpr {
       expr !mul(Mul | Div) block
     | expr !add(Add | Sub | Join) block
