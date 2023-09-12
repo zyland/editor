@@ -7,6 +7,7 @@
   mul @left,
   add @left,
   logic @left,
+  arrow @right,
   def @left,
   lines @left
 }
@@ -21,23 +22,30 @@ expr {
 nonLine {
     Identifier
   | String
-  | Call { nonLine !call expr }
+  | CaptureExpr { "$" Identifier }
+  | CallExpr { nonLine !call expr }
   | BinExpr {
       expr !mul(Mul | Div) expr
     | expr !add(Add | Sub | Join) expr
     | expr !logic(Or | And) expr
     | expr !def(Def) expr
   }
+  | ArrowExpr {
+    expr !arrow "->" expr
+  }
 }
 
 line {
     expr newline
-  | Call { expr !call block }
+  | CallExpr { expr !call block }
   | BinExpr {
       expr !mul(Mul | Div) block
     | expr !add(Add | Sub | Join) block
     | expr !logic(Or | And) block
     | expr !def(Def) block
+  }
+  | ArrowExpr {
+    expr !arrow "->" block
   }
 }
 

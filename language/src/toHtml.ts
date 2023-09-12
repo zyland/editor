@@ -1,7 +1,7 @@
 import { parser } from "./main.grammar"
 import { Tree, SyntaxNodeRef } from "@lezer/common"
 
-import { Expr, expand, $, f } from "@zyland/core"
+import { Expr, expand, $, f, any } from "@zyland/core"
 
 export function toHtml(text: string, tree: Tree) {
     const getText = node => text.slice(node.from, node.to)
@@ -32,6 +32,24 @@ export function toHtml(text: string, tree: Tree) {
             if (node.name == "String") {
                 const text = getText(node.node)
                 return {literal: text.substring(1, text.length-1)}
+            }
+            if (node.name == "CaptureExpr") {
+                return {capture: [
+                    getText(node.node.firstChild),
+                    any,
+                ]}
+            }
+            if (node.name == "CallExpr") {
+                return {call: [
+                    visit(node.node.firstChild),
+                    visit(node.node.lastChild),
+                ]}
+            }
+            if (node.name == "ArrowExpr") {
+                return {arrow: [
+                    visit(node.node.firstChild),
+                    visit(node.node.lastChild),
+                ]}
             }
             if (node.name == "BinExpr") {
                 const opName = node.node.firstChild.nextSibling.type.name.toLowerCase()
