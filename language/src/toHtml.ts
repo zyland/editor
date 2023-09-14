@@ -35,7 +35,7 @@ export function toHtml(text: string, tree: Tree) {
             }
             if (node.name == "CaptureExpr") {
                 return {capture: [
-                    getText(node.node.firstChild),
+                    getText(node.node.lastChild),
                     any,
                 ]}
             }

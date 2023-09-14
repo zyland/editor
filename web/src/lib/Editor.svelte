@@ -13,13 +13,13 @@
     import {TreeFragment} from "@lezer/common"
 
     let value = 
-`
-pat:
+`pat:
   | ""
-  | "(" \\ pat \\ ")"
+  | paren pat
   | pat \\
     | "x"
-    | "-"`
+    | "-"
+paren: $pat -> "(" \\ pat \\ ")"`
     
     let tree = parser.parse(value)
     let fragments = TreeFragment.addTree(tree)

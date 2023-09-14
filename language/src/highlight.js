@@ -6,6 +6,7 @@ export const highlight = styleTags({
     Identifier: t.name,
     "Add Sub Mul Div Join Def": t.operator,
 	"Or And": t.logicOperator,
+    "Dollar Arrow": t.controlOperator,
 })
 
 import { HighlightStyle, syntaxHighlighting } from "@codemirror/language"
@@ -16,6 +17,7 @@ export const colors = [
     { tag: t.name, color: "#fcc01b" },
     { tag: t.operator, color: "#e76a0b" },
     { tag: t.logicOperator, color: "#b38b89" },
+    { tag: t.controlOperator, color: "#ffc5ca" },
 ]
 
 export const extensions = [
