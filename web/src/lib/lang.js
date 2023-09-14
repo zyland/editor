@@ -1,5 +1,5 @@
 import { parser, toHtml } from "../../../language/dist/index.js"
-export { parser, toHtml }
+export * from "../../../language/dist/index.js"
 
 import {
   foldNodeProp,
@@ -41,15 +41,3 @@ const language = LRLanguage.define({
 export function zy() {
   return new LanguageSupport(language)
 }
-
-import { dark } from "ayu"
-const s = dark.syntax
-
-export const myHighlightStyle = HighlightStyle.define([
-  {tag: t.operator, color: s.operator.hex()},
-  {tag: t.content, color: s.markup.hex()},
-  {tag: t.brace, color: s.special.hex()},
-  {tag: t.bracket, color: s.regexp.hex()},
-  {tag: t.name, color: s.func.hex()},
-  {tag: t.number, color: s.constant.hex()}
-])

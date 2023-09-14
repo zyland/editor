@@ -101,3 +101,5 @@ lineEnd { newline | eof }
   Join { "\\" }
   Def { ":" }
 }
+
+@external propSource highlight from "./highlight.js"

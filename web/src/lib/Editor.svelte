@@ -2,11 +2,11 @@
     import CodeMirror from "svelte-codemirror-editor"
     import {
         zy,
-        myHighlightStyle,
+        colors,
         parser,
         toHtml,
     } from "$lib/lang.js"
-    import { syntaxHighlighting } from "@codemirror/language"
+    import { HighlightStyle, syntaxHighlighting } from "@codemirror/language"
     import {EditorView} from "@codemirror/view"
     import { dark } from "ayu"
 
@@ -51,8 +51,10 @@ pat:
             on:change={change}
             lang={zy()}
             extensions={[
-                syntaxHighlighting(myHighlightStyle)
-            ]}
+              syntaxHighlighting(
+                  HighlightStyle.define(colors)
+              )
+          ]}
             theme={EditorView.theme({
               "&": {
                 color: "white",
